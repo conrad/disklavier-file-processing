@@ -54,7 +54,7 @@ create_subdirectories() {
 # output_directory="$3"
 input_directory="disklavier-fils/"
 max_size_kb="713"
-output_directory="output/organize/$current_time"
+output_directory="output/orig-organize/$current_time"
 
 # # Check if input directory exists
 # if [ ! -d "$input_directory" ]; then
