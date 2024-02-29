@@ -24,12 +24,28 @@ for dir in "$directory"/*; do
   if [ -d "$dir" ]; then
     du_output=$(du -k $dir)
     dir_size=$(echo "$du_output" | cut -f1)
-    echo "$dir_size"
     if [ "$dir_size" -lt "$dir_max_size" ]; then
         echo "just copy it over ($dir_size)"
         cp -r "$dir" "$output_dir"
     else
-        echo "Do something else: $dir"
-    fi
+        num_files=$(find $dir -type f | wc -l)
+        for (( i=0; i<=$num_files; i++ ))
+        do
+            for (( j=1; j<=10; j++ ))
+            do
+                mkdir -p "$output_dir-$i"
+                echo .${dir[i]}
+                # cp "$dir[$i]" "$output_dir-$i"
+            done
+        done
+
+        # for ((i = 0; i < ${#dir[@]}; i += 10)); do
+        #     echo "here $i"
+        #     # Copy 10 files at a time
+        #     # batch=("${files_to_copy[@]:i:10}")
+        #     # echo $batch
+        #     # cp -t "$output_dir" "${batch[@]}"
+        # done
+      fi
   fi
 done
