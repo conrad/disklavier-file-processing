@@ -1,6 +1,6 @@
 #!/bin/bash
 
-directory="disklavier-fils"
+directory="data/disklavier-fils"
 dir_max_size=713
 IFS=$'\n' # Set Internal Field Separator to newline to handle spaces in directory names
 
