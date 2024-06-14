@@ -43,15 +43,18 @@ for dir in "$output_dir"/*; do
       du_output=$(du -k "$dir-$i")
       new_dir_size=$(echo "$du_output" | cut -f1)
       echo "$i new_dir_size: $new_dir_size"
+      # TODO: Getting stuck in this while if you get to the end of the directory without filling to the max size
       while [ $new_dir_size -lt $dir_max_size ]
       do
         echo "in while for $dir-$i"
-        # TODO: Here is the issue. It's not finding the files here....
         for file in "$dir"/* ; do
           echo "$file"
-          # echo mv -v -- "$file" "$dir-$i"
-          # mv -v -- "$file" "$dir-$i"
-          mv "$file" "$dir-$i"
+          filename=$(basename ${file})
+          if [[ "$filename" != "*" ]]; then
+            mv "$file" "$dir-$i/$filename"
+          else
+            echo "No more files to move"
+          fi
           break
         done
 
